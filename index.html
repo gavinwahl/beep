@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Random Beep Timer</title>
+    <style>
+      body {
+        font-family: monospace;
+        max-width: 400px;
+        margin: 50px auto;
+        opacity: 0.87;  /* slightly gray text for not too much contrast */
+      }
+      div {
+        margin-bottom: 20px;
+      }
+      button {
+        padding: 5px 10px;
+      }
+      #status {
+        padding: 10px;
+        background: #eee;
+      }
+      #status.beeping {
+        animation: beep 0.5s;
+      }
+      @keyframes beep {
+        50% { background: #ef4444; color: #fff; }
+      }
+      input[type="range"] {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Random Beep Timer</h1>
+
+    <div>
+      <label for="rangeMin">Min interval: <span id="minValue">3.0</span>s</label>
+      <input type="range" id="rangeMin" min="0" max="100" value="3" step="1">
+
+      <label for="rangeMax">Max interval: <span id="maxValue">7.0</span>s</label>
+      <input type="range" id="rangeMax" min="0" max="100" value="7" step="1">
+    </div>
+
+    <div>
+      <label for="volumeSlider">Volume:</label>
+      <input type="range" id="volumeSlider" min="0" max="100" value="31.6">
+      <div>
+        <span id="volumeValue"></span>
+      </div>
+    </div>
+
+    <div>
+      <button id="startBtn">Start</button>
+      <button id="stopBtn" disabled>Stop</button>
+    </div>
+
+    <div id="status">
+      Ready to start
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
