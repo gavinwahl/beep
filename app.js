@@ -1,4 +1,4 @@
-const audioContext = new window.AudioContext();
+const audioContext = new AudioContext()
 
 const elements = {
   rangeMin: document.getElementById('rangeMin'),
@@ -81,7 +81,7 @@ function updateRangeValues() {
     }
     state.maxValue = newMax;
   }
-  
+
   updateRangeDisplay();
   // Reschedule if next beep is outside new range
   if (state.isRunning && state.nextBeepTime) {
@@ -94,6 +94,11 @@ function updateRangeValues() {
 }
 
 function start() {
+  // Resume audio context if suspended (mobile requirement)
+  if (audioContext.state === 'suspended') {
+    audioContext.resume();
+  }
+
   state.isRunning = true;
   elements.startBtn.disabled = true;
   elements.stopBtn.disabled = false;
@@ -131,7 +136,7 @@ function initialize() {
   state.maxValue = parseFloat(elements.rangeMax.value);
   updateRangeDisplay();
   updateVolume();
-  
+
   elements.rangeMin.addEventListener('input', updateRangeValues);
   elements.rangeMax.addEventListener('input', updateRangeValues);
   elements.startBtn.addEventListener('click', start);
