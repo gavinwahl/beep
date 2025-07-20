@@ -97,6 +97,9 @@ function start() {
   // Resume audio context if suspended (mobile requirement)
   if (audioContext.state === 'suspended') {
     audioContext.resume();
+    if (navigator.audioSession) {
+      navigator.audioSession.type = 'playback';  // play while on silent in iOS
+    }
   }
 
   state.isRunning = true;
